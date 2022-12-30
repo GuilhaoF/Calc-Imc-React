@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./App.module.css";
 import PoweredImage from "./assets/powered.png";
+import leftArrowImage from "../src/assets/leftarrow.png";
 import { GridItem } from "./components/GridItem";
 import { levels, calculateImc, LevelProps } from "./helpers/imc";
 
@@ -16,6 +17,11 @@ export default function App() {
       alert("Digite Todos os Campos");
     }
   };
+  function handleBackButton() {
+    setShowItemImc(null);
+    setHeightField(0);
+    setWeightField(0);
+  }
 
   return (
     <div>
@@ -33,6 +39,7 @@ export default function App() {
             pessoa.
           </p>
           <input
+            disabled={showItemImc ? true : false}
             required
             type="number"
             placeholder="Digite sua altura. ex 1.50 (em metros)"
@@ -40,13 +47,19 @@ export default function App() {
             onChange={(e) => setHeightField(parseFloat(e.target.value))}
           />
           <input
+            disabled={showItemImc ? true : false}
             required
             type="number"
             placeholder="Digite seu Peso. ex 75.3 (em kg)"
             value={weightField > 0 ? weightField : ""}
             onChange={(e) => setWeightField(parseFloat(e.target.value))}
           />
-          <button onClick={handleCalculateButton}>Calcular</button>
+          <button
+            onClick={handleCalculateButton}
+            disabled={showItemImc ? true : false}
+          >
+            Calcular
+          </button>
         </div>
         <div className={styles.rightSide}>
           {!showItemImc && (
@@ -58,7 +71,14 @@ export default function App() {
           )}
           {showItemImc && (
             <div className={styles.rightBig}>
-              <div className={styles.rightArrow}></div>
+              <div className={styles.rightArrow}>
+                <img
+                  src={leftArrowImage}
+                  alt="botao voltar"
+                  width={25}
+                  onClick={handleBackButton}
+                />
+              </div>
               <GridItem data={showItemImc} />
             </div>
           )}
