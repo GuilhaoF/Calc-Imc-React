@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styles from "./App.module.css";
-import PoweredImage from "./assets/powered.png";
 import leftArrowImage from "../src/assets/leftarrow.png";
 import { GridItem } from "./components/GridItem";
 import { levels, calculateImc, LevelProps } from "./helpers/imc";
@@ -27,7 +26,8 @@ export default function App() {
     <div>
       <header>
         <div className={styles.headerContainer}>
-          <img src={PoweredImage} alt="logo" width={150} />
+          <h2>Powered by</h2>
+          <strong>Luis G.</strong>
         </div>
       </header>
       <div className={styles.container}>
